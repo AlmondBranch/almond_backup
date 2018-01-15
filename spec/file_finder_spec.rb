@@ -2,6 +2,16 @@ require 'fakefs/spec_helpers'
 require 'fileutils'
 require 'almond_backup/file_finder'
 
+def create_file(rel_file_path)
+  var_name = "#{File.basename(rel_file_path).gsub('.','_')}_path"
+  let(var_name) { File.join(base_directory, rel_file_path) }
+
+  before :example do
+    FileUtils.mkdir_p(File.dirname(eval(var_name)))
+    FileUtils.touch eval(var_name)
+  end
+end
+
 RSpec.describe AlmondBackup::FileFinder do
 
   describe "#find" do
@@ -11,17 +21,11 @@ RSpec.describe AlmondBackup::FileFinder do
       let(:base_directory) { '/base_test_dir/' }
 
       context 'given a .jpg file located directly in the root directory' do
-        let(:jpg_rel_path) { 'test.jpg' }
-        let(:jpg_path) { File.join(base_directory, jpg_rel_path) }
-
-        before :example do
-          FileUtils.mkdir_p(File.dirname(jpg_path))
-          FileUtils.touch jpg_path
-        end
+        create_file 'test.jpg'
             
         it 'finds the .jpg file located directly in the root directory' do
           jpgs = subject.find(base_directory, '.jpg')
-          expect(jpgs).to eq([jpg_path])
+          expect(jpgs).to eq([test_jpg_path])
         end
 
         context 'given a .txt file located directly in the root directory' do
@@ -35,7 +39,7 @@ RSpec.describe AlmondBackup::FileFinder do
 
           it 'finds only the .jpg file located directly in the root directory' do
             jpgs = subject.find(base_directory, '.jpg')
-            expect(jpgs).to eq([jpg_path])
+            expect(jpgs).to eq([test_jpg_path])
           end
         end
       end
