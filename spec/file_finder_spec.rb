@@ -2,17 +2,17 @@ require 'fakefs/spec_helpers'
 require 'fileutils'
 require 'almond_backup/file_finder'
 
-def create_directory(directory, var_name)
-  let(var_name) { directory }
+def create_directory(full_dir_path)
+  let(:base_directory) { full_dir_path }
 
   before :example do
-    FileUtils.mkdir_p(eval(var_name.to_s))
+    FileUtils.mkdir_p(base_directory)
   end
 end
 
-def create_file(rel_file_path)
-  var_name = "#{File.basename(rel_file_path).gsub('.','_')}_path"
-  let(var_name.to_sym) { File.join(base_directory, rel_file_path) }
+def create_file(file_name)
+  var_name = "#{file_name.gsub('.','_')}_path"
+  let(var_name.to_sym) { File.join(base_directory, file_name) }
 
   before :example do
     FileUtils.touch eval(var_name)
@@ -24,24 +24,33 @@ RSpec.describe AlmondBackup::FileFinder do
   describe "#find" do
     include FakeFS::SpecHelpers
 
-    context 'given a root directory to search' do
-      create_directory '/base_test_dir/', :base_directory
+    context 'given a root directory to search for .jpg files' do
+      create_directory '/base_test_dir/'
 
-      context 'given a .jpg file located directly in the root directory' do
+      context 'having a file test.jpg' do
         create_file 'test.jpg'
             
-        it 'finds the .jpg file located directly in the root directory' do
+        it 'finds test.jpg' do
           jpgs = subject.find(base_directory, '.jpg')
           expect(jpgs).to eq(['/base_test_dir/test.jpg'])
         end
 
-        context 'given a .txt file located directly in the root directory' do
+        context 'and having a file test.txt' do
           create_file 'test.txt'
 
-          it 'finds only the .jpg file located directly in the root directory' do
+          it 'finds test.jpg and not test.txt' do
             jpgs = subject.find(base_directory, '.jpg')
             expect(jpgs).to eq(['/base_test_dir/test.jpg'])
           end
+        end
+      end
+      
+      context 'having a file test.JPG' do
+        create_file 'test.JPG'
+
+        it 'finds test.JPG' do
+          jpgs = subject.find(base_directory, '.jpg')
+          expect(jpgs).to eq(['/base_test_dir/test.JPG'])
         end
       end
     end
