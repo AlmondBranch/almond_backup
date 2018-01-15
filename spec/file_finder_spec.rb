@@ -3,7 +3,6 @@ require 'fileutils'
 require 'almond_backup/file_finder'
 
 RSpec.describe AlmondBackup::FileFinder do
-  let(:file_finder) { AlmondBackup::FileFinder.new }
 
   describe "#find" do
     include FakeFS::SpecHelpers
@@ -21,7 +20,7 @@ RSpec.describe AlmondBackup::FileFinder do
         end
             
         it 'finds the .jpg file located directly in the root directory' do
-          jpgs = file_finder.find(base_directory, '.jpg')
+          jpgs = subject.find(base_directory, '.jpg')
           expect(jpgs).to eq([jpg_path])
         end
 
@@ -35,7 +34,7 @@ RSpec.describe AlmondBackup::FileFinder do
           end
 
           it 'finds only the .jpg file located directly in the root directory' do
-            jpgs = file_finder.find(base_directory, '.jpg')
+            jpgs = subject.find(base_directory, '.jpg')
             expect(jpgs).to eq([jpg_path])
           end
         end
