@@ -29,13 +29,7 @@ RSpec.describe AlmondBackup::FileFinder do
         end
 
         context 'given a .txt file located directly in the root directory' do
-          let(:txt_rel_path) { 'test.txt' }
-          let(:txt_path) { File.join(base_directory, txt_rel_path) }
-
-          before :example do
-            FileUtils.mkdir_p(File.dirname(txt_path))
-            FileUtils.touch txt_path
-          end
+          create_file 'test.txt'
 
           it 'finds only the .jpg file located directly in the root directory' do
             jpgs = subject.find(base_directory, '.jpg')
