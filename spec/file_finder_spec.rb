@@ -25,7 +25,7 @@ RSpec.describe AlmondBackup::FileFinder do
             
         it 'finds the .jpg file located directly in the root directory' do
           jpgs = subject.find(base_directory, '.jpg')
-          expect(jpgs).to eq([test_jpg_path])
+          expect(jpgs).to eq(['/base_test_dir/test.jpg'])
         end
 
         context 'given a .txt file located directly in the root directory' do
@@ -33,7 +33,7 @@ RSpec.describe AlmondBackup::FileFinder do
 
           it 'finds only the .jpg file located directly in the root directory' do
             jpgs = subject.find(base_directory, '.jpg')
-            expect(jpgs).to eq([test_jpg_path])
+            expect(jpgs).to eq(['/base_test_dir/test.jpg'])
           end
         end
       end
