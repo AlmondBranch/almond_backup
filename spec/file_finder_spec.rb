@@ -1,22 +1,11 @@
 require 'fakefs/spec_helpers'
 require 'fileutils'
 require 'almond_backup/file_finder'
-
-def create_directory(full_dir_path)
-  let(:base_directory) { full_dir_path }
-
-  before :example do
-    FileUtils.mkdir_p(base_directory)
-  end
-end
-
-def create_file(file_name)
-  before :example do
-    FileUtils.touch File.join(base_directory, file_name)
-  end
-end
+require 'support/file_system_spec_utils'
 
 RSpec.describe AlmondBackup::FileFinder do
+  extend AlmondBranch::Test::FileSystem
+
   describe "#find" do
     include FakeFS::SpecHelpers
 
