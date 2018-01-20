@@ -18,7 +18,7 @@ RSpec.describe AlmondBackup::FileFinder do
       end
     end
 
-    context 'when a file with an extension that is not being searched for exists' do
+    context 'when a file not being searched for exists' do
       create_file '/base/test.png'
 
       it 'does not find the file' do
