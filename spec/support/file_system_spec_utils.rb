@@ -1,17 +1,17 @@
 module AlmondBranch
   module Test
     module FileSystem
-      def create_directory(full_dir_path)
-        let(:base_directory) { full_dir_path }
-
+      def create_directory(path)
         before :example do
-        FileUtils.mkdir_p(base_directory)
+          FileUtils.mkdir_p(path)
+        end
       end
-    end
 
-      def create_file(file_name)
+      def create_file(file_path)
+        create_directory(File.dirname(file_path))
+
         before :example do
-          FileUtils.touch File.join(base_directory, file_name)
+          FileUtils.touch file_path
         end
       end
     end
