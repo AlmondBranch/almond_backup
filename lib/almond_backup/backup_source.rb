@@ -10,10 +10,11 @@ module AlmondBackup
     end
 
     def backup_file(file, folder_tag)      
-      if (@backup_folders[backup_folder].nil?)
-        @backup_folders.add(folder_tag, AlmondBackup::BackupFolder.new(File.join(@folder, folder_tag)))
+      if (@backup_folders[folder_tag].nil?)
+        @backup_folders[folder_tag] = AlmondBackup::BackupFolder.new(File.join(@folder, folder_tag))
+      end
 
-      @backup_folders[backup_folder].add_file(file)
+      @backup_folders[folder_tag].add_file(file)
     end
   end
 end
