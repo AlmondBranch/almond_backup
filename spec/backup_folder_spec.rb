@@ -1,5 +1,4 @@
 require 'fakefs/spec_helpers'
-require 'fileutils'
 require 'almond_backup/backup_folder'
 require 'support/file_system_spec_utils'
 
@@ -63,6 +62,22 @@ RSpec.describe AlmondBackup::BackupFolder do
           expect(backup_folder.get_max_num).to eq(0)
         end
       end
+    end
+  end
+
+  describe "#add_file" do
+    let(:folder_path) { '/base' }
+    create_directory '/base'
+    create_file '/other/tobackup.txt'
+
+    it 'backs up the file' do
+      backup_folder.add_file('/other/tobackup.txt')
+      expect(File.exist?('/base/tobackup Backup_1.txt')).to eq(true)
+    end
+
+    it 'incrememts the max num' do
+      backup_folder.add_file('/other/tobackup.txt')
+      expect(backup_folder.get_max_num).to eq(1)
     end
   end
 end
