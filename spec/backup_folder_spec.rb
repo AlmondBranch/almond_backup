@@ -1,0 +1,68 @@
+require 'fakefs/spec_helpers'
+require 'fileutils'
+require 'almond_backup/backup_folder'
+require 'support/file_system_spec_utils'
+
+RSpec.describe AlmondBackup::BackupFolder do
+  extend AlmondBranch::Test::FileSystem
+  include FakeFS::SpecHelpers
+
+  let(:backup_folder) { AlmondBackup::BackupFolder.new(folder_path) }
+  let(:folder_path) { nil }
+
+  describe "#get_backup_number" do
+    context 'when a backup number is specified' do
+      let(:file_name) { "test Backup_02.txt" }
+
+      it 'returns the backup number' do
+        expect(backup_folder.get_backup_number(file_name)).to eq(2)
+      end
+    end
+
+    context 'when a backup number is not specified' do
+      let(:file_name) { "test.txt" }
+
+      it 'returns 0' do
+        expect(backup_folder.get_backup_number(file_name)).to eq(0)
+      end
+    end
+  end
+
+  describe "#add_backup_number" do
+    example 'adding a backup number of 2 to test.txt' do
+      expect(backup_folder.add_backup_number('test.txt', 2)).to eq('test Backup_2.txt')
+    end
+  end
+
+  describe "#get_hashes" do
+    context 'given a folder' do
+      let(:folder_path) { '/base' }
+      create_directory '/base'
+
+      context 'with two files that do not have backup numbers' do
+        create_file '/base/file1.txt'
+        create_file '/base/file2.txt'
+
+        it 'returns two hashes' do
+          expect(backup_folder.get_hashes.size).to eq(2)
+        end
+      end
+    end
+  end
+
+  describe "#get_max_num" do
+    context 'given a folder' do
+      let(:folder_path) { '/base' }
+      create_directory '/base'
+
+      context 'with two files that do not have backup numbers' do
+        create_file '/base/file1.txt'
+        create_file '/base/file2.txt'
+
+        it 'returns a max num of 0' do
+          expect(backup_folder.get_max_num).to eq(0)
+        end
+      end
+    end
+  end
+end
