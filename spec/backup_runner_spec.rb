@@ -25,5 +25,14 @@ RSpec.describe AlmondBackup::BackupRunner do
         expect { backup_runner.run_backup('/source', '/dest', '.jpg') }.to raise_error
       end
     end
+
+    context 'when the source and destination folder exist and are the same' do
+      create_directory '/source'
+      create_directory '/dest'
+
+      it 'throws an exception because the folders are the same' do
+        expect { backup_runner.run_backup('/source', '/dest', '.jpg') }.to raise_error
+      end
+    end
   end
 end
