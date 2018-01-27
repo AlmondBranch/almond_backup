@@ -9,7 +9,8 @@ module AlmondBackup
     end
 
     def creation_date
-      FileData::Exif.only_image_tag(@path, [34_665, 36_867])
+      raw_tag = FileData::Exif.only_image_tag(@path, [34_665, 36_867])
+      DateTime.strptime(raw_tag, '%Y:%m:%d %H:%M:%S') unless raw_tag.nil?
     end
   end
 end

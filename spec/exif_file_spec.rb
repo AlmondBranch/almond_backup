@@ -30,7 +30,7 @@ RSpec.describe AlmondBackup::ExifFile do
       end
 
       it 'finds the creation date' do
-        expect(AlmondBackup::ExifFile.new(get_stream(with_creation_date)).creation_date).to eq('2018:01:20 12:00:00')
+        expect(AlmondBackup::ExifFile.new(get_stream(with_creation_date)).creation_date).to eq(DateTime.new(2018,1,20,12))
       end
     end
   end
