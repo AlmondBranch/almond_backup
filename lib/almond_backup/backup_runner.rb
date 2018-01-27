@@ -1,5 +1,4 @@
 require_relative 'file_finder'
-require_relative 'file_sorter_factory'
 require_relative 'exif_file'
 require_relative 'backup_source'
 require 'pathname'

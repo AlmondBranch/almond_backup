@@ -2,6 +2,7 @@ require 'fakefs/spec_helpers'
 require 'fileutils'
 require 'almond_backup/exif_file'
 require 'support/file_system_spec_utils'
+require 'date'
 
 RSpec.describe AlmondBackup::ExifFile do
   extend AlmondBranch::Test::FileSystem

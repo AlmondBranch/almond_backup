@@ -1,4 +1,5 @@
 require 'file_data'
+require 'date'
 
 module AlmondBackup
   class ExifFile
