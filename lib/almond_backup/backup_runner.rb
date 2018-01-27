@@ -9,6 +9,9 @@ module AlmondBackup
     end
 
     def run_backup(source_folder, destination_folder, *file_extensions)
+      raise "Source folder does not exist" unless Dir.exist? source_folder
+      raise "Destination folder does not exist" unless Dir.exist? destination_folder
+
       files = @file_finder.find(source_folder, *file_extensions)
 
       backup_source = AlmondBackup::BackupSource.new(destination_folder)
