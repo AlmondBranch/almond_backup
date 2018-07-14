@@ -1,7 +1,7 @@
 require_relative 'file_finder'
-require_relative 'exif_file'
 require_relative 'backup_source'
 require 'pathname'
+require 'file_data'
 
 module AlmondBackup
   class BackupRunner
@@ -29,9 +29,8 @@ module AlmondBackup
       backup_source = AlmondBackup::BackupSource.new(destination_folder)
 
       files.each do |f|
-        puts "Path: #{f}"
-        creation_date = AlmondBackup::ExifFile.new(f).creation_date
-        backup_folder = creation_date.nil? ? "" : creation_date.strftime("%Y_%m")
+        origin_date = FileData::FileInfo.creation_date(f)
+        backup_folder = origin_date.nil? ? "" : origin_date.strftime("%Y_%m")
 
         backup_source.backup_file(f, backup_folder)
       end
