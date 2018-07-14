@@ -34,6 +34,8 @@ module AlmondBackup
       num = get_max_num + 1
 
       rebased_path = File.join(folder, File.basename(path))
+      FileUtils.mkdir_p folder
+
       save_path = add_backup_number(rebased_path, num)
 
       FileUtils.cp path, save_path
