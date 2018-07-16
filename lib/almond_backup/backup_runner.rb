@@ -29,7 +29,7 @@ module AlmondBackup
       backup_source = AlmondBackup::BackupSource.new(destination_folder)
 
       files.each do |f|
-        origin_date = FileData::FileInfo.creation_date(f)
+        origin_date = FileData::FileInfo.origin_date(f)
         backup_folder = origin_date.nil? ? "" : origin_date.strftime("%Y_%m")
 
         backup_source.backup_file(f, backup_folder)
