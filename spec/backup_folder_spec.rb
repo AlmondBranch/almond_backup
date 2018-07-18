@@ -72,7 +72,16 @@ RSpec.describe AlmondBackup::BackupFolder do
 
     it 'backs up the file' do
       backup_folder.add_file('/other/tobackup.txt')
-      expect(File.exist?('/base/tobackup Backup_1.txt')).to eq(true)
+      expect(File.exist?('/base/tobackup.txt')).to eq(true)
+    end
+
+    describe 'when a file with the same name already exists in the backup folder' do
+      create_file '/base/tobackup.txt'
+
+      it 'adds a unique suffix to the end of the backed up file name' do
+        backup_folder.add_file('/other/tobackup.txt')
+        expect(File.exist?('/base/tobackup Backup_1'))
+      end
     end
 
     it 'incrememts the max num' do

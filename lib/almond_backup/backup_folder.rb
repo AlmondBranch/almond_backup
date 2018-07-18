@@ -33,10 +33,10 @@ module AlmondBackup
     def add_file(path)
       num = get_max_num + 1
 
-      rebased_path = File.join(folder, File.basename(path))
+      save_path = File.join(folder, File.basename(path))
       FileUtils.mkdir_p folder
 
-      save_path = add_backup_number(rebased_path, num)
+      save_path = add_backup_number(save_path, num) if File.exist?(save_path)
 
       FileUtils.cp path, save_path
 

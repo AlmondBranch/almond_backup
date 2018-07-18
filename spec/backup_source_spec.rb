@@ -16,7 +16,7 @@ RSpec.describe AlmondBackup::BackupSource do
 
     it 'backs up the file' do
       backup_source.backup_file('/other/tobackup.txt', 'txt_files')
-      expect(File.exist?('/backup/txt_files/tobackup Backup_1.txt')).to eq(true)
+      expect(File.exist?('/backup/txt_files/tobackup.txt')).to eq(true)
     end
   end
 end
