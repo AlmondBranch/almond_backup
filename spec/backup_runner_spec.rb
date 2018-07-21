@@ -43,7 +43,7 @@ RSpec.describe AlmondBackup::BackupRunner do
       end
     end
 
-    context 'when there is a single file to backup' do
+    context 'when there is a file created in Januray 2018' do
       create_directory '/source'
       create_directory '/destination'
       create_file '/source/test.jpg'
@@ -71,7 +71,7 @@ RSpec.describe AlmondBackup::BackupRunner do
         end
       end
 
-      it 'backups up the single file' do
+      it 'backups up the single file in the 2018_01 folder' do
         backup_runner.run_backup('/source', '/destination', '.jpg')
         expect(File.file?('/destination/2018_01/test Backup_1.jpg'))
       end
