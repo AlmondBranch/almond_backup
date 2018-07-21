@@ -71,6 +71,52 @@ RSpec.describe AlmondBackup::BackupRunner do
         end
       end
 
+      context 'and there are no other files backed up in that folder yet' do
+        it 'backups up the single file in the 2018_01 folder' do
+          backup_runner.run_backup('/source', '/destination', '.jpg')
+          expect(File.file?('/destination/2018_01/test.jpg')).to be true
+        end
+      end
+
+      context 'and there is another file backed up in that folder with the same name' do
+        create_file '/destination/2018_01/test.jpg'
+
+        it 'backs up the file and adds a backup number to the file name' do
+          backup_runner.run_backup('/source', '/destination', '.jpg')
+          expect(File.file?('/destination/2018_01/test.jpg')).to be true
+          expect(File.file?('/destination/2018_01/test Backup_1.jpg')).to be true
+        end
+      end
+    end
+
+    context 'when there is a file created in Januray 2018' do
+      create_directory '/source'
+      create_directory '/destination'
+      create_file '/source/test.jpg'
+
+      let(:jpg_contents) do
+        [255, 216, # JPEG SOI
+         [255, 225], [0, 73], # APP1 marker and size
+         [69, 120, 105, 102, 0, 0], # Exif\0\0 marker
+         [77, 77], [0, 42], # Exif big endian header
+         [0, 0, 0, 8], [0, 1], # IFD0 offset and tag count
+         [135, 105], [0, 4], [0, 0, 0, 4], [0, 0, 0, 26],
+         [0, 0, 0, 0], # No next IFD marker
+         [0, 1], # Number of IFD tags
+         [144, 3], [0, 2], [0, 0, 0, 19], [0, 0, 0, 44], # Creation Date Tag
+         [0, 0, 0, 0], # No next IFD marker
+         [50, 48, 49, 56, 58, 48, 49, 58, 50, 48, 32, 49, 50, 58, 48, 48, 58, 48, 48], # Creation Date Value '2018:01:20 12:00:00'
+         [255, 217]].flatten # JPEG EOI
+      end
+
+      before :example do
+        File.open('/source/test.jpg', 'w') do |output|
+          jpg_contents.each do |byte|
+            output.print byte.chr
+          end
+        end
+      end
+
       it 'backups up the single file in the 2018_01 folder' do
         backup_runner.run_backup('/source', '/destination', '.jpg')
         expect(File.file?('/destination/2018_01/test.jpg')).to be true
