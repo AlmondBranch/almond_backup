@@ -32,8 +32,6 @@ module AlmondBackup
     end
 
     def add_file(path)
-      num = max_num + 1
-
       save_path = File.join(folder, File.basename(path))
       FileUtils.mkdir_p folder
 
