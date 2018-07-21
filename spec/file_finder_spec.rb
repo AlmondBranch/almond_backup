@@ -6,7 +6,7 @@ require 'support/file_system_spec_utils'
 RSpec.describe AlmondBackup::FileFinder do
   extend AlmondBranch::Test::FileSystem
 
-  describe "#find" do
+  describe '#find' do
     include FakeFS::SpecHelpers
 
     context 'when a matching file exists in a subdirectory' do

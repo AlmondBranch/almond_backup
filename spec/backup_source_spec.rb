@@ -9,8 +9,8 @@ RSpec.describe AlmondBackup::BackupSource do
   let(:backup_source) { AlmondBackup::BackupSource.new(folder_path) }
   let(:folder_path) { nil }
 
-  describe "#backup_source" do
-    let (:folder_path) { '/backup' }
+  describe '#backup_source' do
+    let(:folder_path) { '/backup' }
     create_directory '/backup'
     create_file '/other/tobackup.txt'
 

@@ -1,6 +1,7 @@
 require_relative 'backup_folder'
 
 module AlmondBackup
+  # Represents the destination where backup files are saved to
   class BackupSource
     attr_reader :folder
 
@@ -9,8 +10,8 @@ module AlmondBackup
       @backup_folders = {}
     end
 
-    def backup_file(file, folder_tag)      
-      if (@backup_folders[folder_tag].nil?)
+    def backup_file(file, folder_tag)
+      if @backup_folders[folder_tag].nil?
         @backup_folders[folder_tag] = AlmondBackup::BackupFolder.new(File.join(@folder, folder_tag))
       end
 

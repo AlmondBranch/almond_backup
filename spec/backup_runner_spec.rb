@@ -9,7 +9,7 @@ RSpec.describe AlmondBackup::BackupRunner do
 
   let(:backup_runner) { AlmondBackup::BackupRunner.new(AlmondBackup::FileFinder.new) }
 
-  describe "#run_backup" do
+  describe '#run_backup' do
     context 'when the destination folder exists' do
       create_directory '/dest'
 
@@ -50,17 +50,17 @@ RSpec.describe AlmondBackup::BackupRunner do
 
       let(:jpg_contents) do
         [255, 216, # JPEG SOI
-        [255, 225], [0, 73], # APP1 marker and size
-        [69, 120, 105, 102, 0, 0], # Exif\0\0 marker
-        [77, 77], [0, 42], # Exif big endian header
-        [0, 0, 0, 8], [0, 1], # IFD0 offset and tag count
-        [135, 105], [0, 4], [0, 0, 0, 4], [0, 0, 0, 26],
-        [0, 0, 0, 0], #No next IFD marker
-        [0, 1], #Number of IFD tags
-        [144, 3], [0, 2], [0, 0, 0, 19], [0, 0, 0, 44], #Creation Date Tag
-        [0, 0, 0, 0], # No next IFD marker
-        [50, 48, 49, 56, 58, 48, 49, 58, 50, 48, 32, 49, 50, 58, 48, 48, 58, 48, 48], #Creation Date Value '2018:01:20 12:00:00'
-        [255, 217]].flatten #JPEG EOI
+         [255, 225], [0, 73], # APP1 marker and size
+         [69, 120, 105, 102, 0, 0], # Exif\0\0 marker
+         [77, 77], [0, 42], # Exif big endian header
+         [0, 0, 0, 8], [0, 1], # IFD0 offset and tag count
+         [135, 105], [0, 4], [0, 0, 0, 4], [0, 0, 0, 26],
+         [0, 0, 0, 0], # No next IFD marker
+         [0, 1], # Number of IFD tags
+         [144, 3], [0, 2], [0, 0, 0, 19], [0, 0, 0, 44], # Creation Date Tag
+         [0, 0, 0, 0], # No next IFD marker
+         [50, 48, 49, 56, 58, 48, 49, 58, 50, 48, 32, 49, 50, 58, 48, 48, 58, 48, 48], # Creation Date Value '2018:01:20 12:00:00'
+         [255, 217]].flatten # JPEG EOI
       end
 
       before :example do

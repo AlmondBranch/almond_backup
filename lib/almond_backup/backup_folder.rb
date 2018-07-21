@@ -3,35 +3,36 @@ require 'digest'
 require 'fileutils'
 
 module AlmondBackup
+  # Container for backed up files
   class BackupFolder
     attr_reader :folder
 
-    DIGITS_CAPTURE = '(\d+)'
-    BACKUP_MARKER = " Backup_#{DIGITS_CAPTURE}"
-    BACKUP_REGEX = Regexp.new(/#{BACKUP_MARKER}\./i)
+    DIGITS_CAPTURE = '(\d+)'.freeze
+    BACKUP_MARKER = " Backup_#{DIGITS_CAPTURE}".freeze
+    BACKUP_REGEX = Regexp.new(/#{BACKUP_MARKER}\./i).freeze
 
     def initialize(folder)
       @folder = folder
       @max_num = 0
     end
 
-    def get_hashes
+    def hashes
       @hashes ||= Dir.glob(File.join(folder, '**', '*.*'))
-        .each_with_object(Set.new) do |f, set|
-          set.add(get_file_hash(f))
+                     .each_with_object(Set.new) do |f, set|
+                       set.add(get_file_hash(f))
 
-          num = get_backup_number(f)
-          @max_num = num if num > @max_num
-        end
+                       num = get_backup_number(f)
+                       @max_num = num if num > @max_num
+                     end
     end
 
-    def get_max_num
-      @hashes ||= get_hashes
+    def max_num
+      @hashes ||= hashes
       @max_num
     end
 
     def add_file(path)
-      num = get_max_num + 1
+      num = max_num + 1
 
       save_path = File.join(folder, File.basename(path))
       FileUtils.mkdir_p folder
@@ -40,7 +41,7 @@ module AlmondBackup
 
       FileUtils.cp path, save_path
 
-      get_hashes.add(get_file_hash(save_path))
+      hashes.add(get_file_hash(save_path))
       @max_num = num
     end
 
