@@ -1,6 +1,6 @@
+require 'fakefs/spec_helpers'
 require 'almond_backup/backup_runner'
 require 'almond_backup/file_finder'
-require 'fakefs/spec_helpers'
 require 'support/file_system_spec_utils'
 
 RSpec.describe AlmondBackup::BackupRunner do
@@ -73,7 +73,7 @@ RSpec.describe AlmondBackup::BackupRunner do
 
       it 'backups up the single file in the 2018_01 folder' do
         backup_runner.run_backup('/source', '/destination', '.jpg')
-        expect(File.file?('/destination/2018_01/test Backup_1.jpg'))
+        expect(File.file?('/destination/2018_01/test.jpg')).to be true
       end
     end
   end

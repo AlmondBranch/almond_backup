@@ -37,12 +37,14 @@ module AlmondBackup
       save_path = File.join(folder, File.basename(path))
       FileUtils.mkdir_p folder
 
-      save_path = add_backup_number(save_path, num) if File.exist?(save_path)
+      if File.exist? save_path
+        backup_num = @max_num + 1
+        save_path = add_backup_number(save_path, backup_num)
+        @max_num = backup_num
+      end
 
       FileUtils.cp path, save_path
-
       hashes.add(get_file_hash(save_path))
-      @max_num = num
     end
 
     def get_file_hash(path)
