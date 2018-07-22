@@ -36,7 +36,7 @@ module AlmondBackup
       FileUtils.mkdir_p folder
 
       if File.exist? save_path
-        backup_num = @max_num + 1
+        backup_num = max_num + 1
         save_path = add_backup_number(save_path, backup_num)
         @max_num = backup_num
       end
@@ -55,7 +55,7 @@ module AlmondBackup
     end
 
     def add_backup_number(path, num)
-      marker_index = path.index('.', 1) || path.size
+      marker_index = path.index('.', 1)
       path.insert(marker_index, BACKUP_MARKER.sub(DIGITS_CAPTURE, num.to_s))
     end
   end

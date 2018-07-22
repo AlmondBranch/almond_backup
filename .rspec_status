@@ -1,17 +1,18 @@
-example_id                              | status | run_time        |
---------------------------------------- | ------ | --------------- |
-./spec/backup_runner_spec.rb[1:1:1:1]   | passed | 0.00361 seconds |
-./spec/backup_runner_spec.rb[1:1:2:1]   | passed | 0.00208 seconds |
-./spec/backup_runner_spec.rb[1:1:3:1]   | passed | 0.00388 seconds |
-./spec/backup_runner_spec.rb[1:1:4:1]   | passed | 0.00454 seconds |
-./spec/backup_runner_spec.rb[1:1:5:1:1] | passed | 0.02549 seconds |
-./spec/backup_runner_spec.rb[1:1:5:2:1] | passed | 0.02031 seconds |
-./spec/backup_runner_spec.rb[1:1:6:1]   | passed | 0.00816 seconds |
-./spec/file_finder_spec.rb[1:1:1:1]     | passed | 0.00227 seconds |
-./spec/file_finder_spec.rb[1:1:2:1]     | passed | 0.00854 seconds |
-./spec/file_finder_spec.rb[1:1:3:1:1]   | passed | 0.00563 seconds |
-./spec/file_finder_spec.rb[1:1:3:2:1]   | passed | 0.00156 seconds |
-./spec/file_finder_spec.rb[1:1:4:1:1]   | passed | 0.00506 seconds |
-./spec/file_finder_spec.rb[1:1:4:2:1]   | passed | 0.00798 seconds |
-./spec/file_finder_spec.rb[1:1:5:1:1]   | passed | 0.01022 seconds |
-./spec/file_finder_spec.rb[1:1:6:1:1]   | passed | 0.0027 seconds  |
+example_id                                | status | run_time        |
+----------------------------------------- | ------ | --------------- |
+./spec/backup_runner_spec.rb[1:1:1:1]     | passed | 0.00609 seconds |
+./spec/backup_runner_spec.rb[1:1:2:1]     | passed | 0.00329 seconds |
+./spec/backup_runner_spec.rb[1:1:3:1]     | passed | 0.00356 seconds |
+./spec/backup_runner_spec.rb[1:1:4:1]     | passed | 0.00374 seconds |
+./spec/backup_runner_spec.rb[1:1:5:1:1]   | passed | 0.02188 seconds |
+./spec/backup_runner_spec.rb[1:1:5:2:1]   | passed | 0.0168 seconds  |
+./spec/backup_runner_spec.rb[1:1:5:2:2:1] | passed | 0.02148 seconds |
+./spec/backup_runner_spec.rb[1:1:6:1]     | passed | 0.01175 seconds |
+./spec/file_finder_spec.rb[1:1:1:1]       | passed | 0.00521 seconds |
+./spec/file_finder_spec.rb[1:1:2:1]       | passed | 0.00558 seconds |
+./spec/file_finder_spec.rb[1:1:3:1:1]     | passed | 0.00165 seconds |
+./spec/file_finder_spec.rb[1:1:3:2:1]     | passed | 0.00151 seconds |
+./spec/file_finder_spec.rb[1:1:4:1:1]     | passed | 0.00161 seconds |
+./spec/file_finder_spec.rb[1:1:4:2:1]     | passed | 0.00151 seconds |
+./spec/file_finder_spec.rb[1:1:5:1:1]     | passed | 0.01204 seconds |
+./spec/file_finder_spec.rb[1:1:6:1:1]     | passed | 0.00864 seconds |

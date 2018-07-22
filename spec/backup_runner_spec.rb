@@ -78,7 +78,7 @@ RSpec.describe AlmondBackup::BackupRunner do
         end
       end
 
-      context 'and there is a second file with the same creation date and the same name in a subfolder' do
+      context 'and there is a second file to be backed up with the same name and creation date in a subfolder' do
         create_file '/source/subfolder/test.jpg'
 
         before :example do
@@ -94,6 +94,20 @@ RSpec.describe AlmondBackup::BackupRunner do
 
           expect(File.file?('/destination/2018_01/test.jpg')).to be true
           expect(File.file?('/destination/2018_01/test Backup_1.jpg')).to be true
+        end
+
+        context 'and there is are already two copies of that same file name backed up' do
+          create_file '/destination/2018_01/test.jpg'
+          create_file '/destination/2018_01/test Backup_1.jpg'
+
+          it 'adds backup numbers so that all four files are in the backup folder' do
+            backup_runner.run_backup('/source', '/destination', '.jpg')
+
+            expect(File.file?('/destination/2018_01/test.jpg')).to be true
+            expect(File.file?('/destination/2018_01/test Backup_1.jpg')).to be true
+            expect(File.file?('/destination/2018_01/test Backup_2.jpg')).to be true
+            expect(File.file?('/destination/2018_01/test Backup_3.jpg')).to be true
+          end
         end
       end
     end
