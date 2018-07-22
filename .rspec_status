@@ -1,17 +1,17 @@
 example_id                              | status | run_time        |
 --------------------------------------- | ------ | --------------- |
-./spec/backup_runner_spec.rb[1:1:1:1]   | passed | 0.00406 seconds |
-./spec/backup_runner_spec.rb[1:1:2:1]   | passed | 0.00217 seconds |
-./spec/backup_runner_spec.rb[1:1:3:1]   | passed | 0.00242 seconds |
-./spec/backup_runner_spec.rb[1:1:4:1]   | passed | 0.00307 seconds |
-./spec/backup_runner_spec.rb[1:1:5:1:1] | passed | 0.01023 seconds |
-./spec/backup_runner_spec.rb[1:1:5:2:1] | passed | 0.02352 seconds |
-./spec/backup_runner_spec.rb[1:1:6:1]   | passed | 0.0154 seconds  |
-./spec/file_finder_spec.rb[1:1:1:1]     | passed | 0.00389 seconds |
-./spec/file_finder_spec.rb[1:1:2:1]     | passed | 0.00705 seconds |
-./spec/file_finder_spec.rb[1:1:3:1:1]   | passed | 0.00816 seconds |
-./spec/file_finder_spec.rb[1:1:3:2:1]   | passed | 0.0076 seconds  |
-./spec/file_finder_spec.rb[1:1:4:1:1]   | passed | 0.00979 seconds |
-./spec/file_finder_spec.rb[1:1:4:2:1]   | passed | 0.01111 seconds |
-./spec/file_finder_spec.rb[1:1:5:1:1]   | passed | 0.01663 seconds |
-./spec/file_finder_spec.rb[1:1:6:1:1]   | passed | 0.01674 seconds |
+./spec/backup_runner_spec.rb[1:1:1:1]   | passed | 0.00361 seconds |
+./spec/backup_runner_spec.rb[1:1:2:1]   | passed | 0.00208 seconds |
+./spec/backup_runner_spec.rb[1:1:3:1]   | passed | 0.00388 seconds |
+./spec/backup_runner_spec.rb[1:1:4:1]   | passed | 0.00454 seconds |
+./spec/backup_runner_spec.rb[1:1:5:1:1] | passed | 0.02549 seconds |
+./spec/backup_runner_spec.rb[1:1:5:2:1] | passed | 0.02031 seconds |
+./spec/backup_runner_spec.rb[1:1:6:1]   | passed | 0.00816 seconds |
+./spec/file_finder_spec.rb[1:1:1:1]     | passed | 0.00227 seconds |
+./spec/file_finder_spec.rb[1:1:2:1]     | passed | 0.00854 seconds |
+./spec/file_finder_spec.rb[1:1:3:1:1]   | passed | 0.00563 seconds |
+./spec/file_finder_spec.rb[1:1:3:2:1]   | passed | 0.00156 seconds |
+./spec/file_finder_spec.rb[1:1:4:1:1]   | passed | 0.00506 seconds |
+./spec/file_finder_spec.rb[1:1:4:2:1]   | passed | 0.00798 seconds |
+./spec/file_finder_spec.rb[1:1:5:1:1]   | passed | 0.01022 seconds |
+./spec/file_finder_spec.rb[1:1:6:1:1]   | passed | 0.0027 seconds  |
